@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin Tes Tulis Granostic</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Lexend:wght@300;350;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/app.css">
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body class="admin">
+  <header class="top hidden" id="top">
+    <div class="top-in">
+      <img src="assets/logo.png" alt="Granostic" class="top-logo">
+      <nav class="tabs" aria-label="Menu admin">
+        <a href="#kandidat" data-tab="kandidat">Kandidat</a>
+        <a href="#rekap" data-tab="rekap">Rekapitulasi</a>
+        <a href="#bank" data-tab="bank">Bank Soal</a>
+        <a href="#akun" data-tab="akun">Akun</a>
+      </nav>
+      <button class="btn ghost sm" id="bLogout">Keluar</button>
+    </div>
+  </header>
+  <main id="app" class="page"><div class="center-load"><div class="spinner"></div></div></main>
+
+  <script src="config.js"></script>
+  <script src="assets/common.js"></script>
+  <script src="assets/admin.js"></script>
+  <script src="assets/admin-v3.js"></script>
+  <script src="assets/admin-import.js"></script>
+</body>
+</html>
