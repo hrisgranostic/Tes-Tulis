@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panduan Admin Tes Tulis Granostic</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;350;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/app.css">
+  <link rel="stylesheet" href="assets/panduan.css">
+</head>
+<body class="guide">
+  <header class="g-top">
+    <div class="g-top-in">
+      <img src="assets/logo.png" alt="Granostic">
+      <span class="sp"></span>
+      <a class="btn ghost" href="admin.html"><span class="long">Ke halaman admin</span><span class="short">Admin</span></a>
+      <button class="btn ghost print" id="bPrint" type="button"><span class="long">Cetak / simpan PDF</span><span class="short">PDF</span></button>
+    </div>
+  </header>
+
+  <div class="g-wrap">
+    <aside class="g-toc" aria-label="Daftar isi">
+      <b>Isi panduan</b>
+      <nav>
+        <a href="#gambaran">Gambaran umum</a>
+        <a href="#masuk">Masuk &amp; keamanan</a>
+        <a href="#tambah">Tambah kandidat</a>
+        <a href="#impor">Impor dari Excel</a>
+        <a href="#undangan">Kirim undangan</a>
+        <a href="#pantau">Memantau kandidat</a>
+        <a href="#hasil">Membaca hasil</a>
+        <a href="#rekap">Rekapitulasi</a>
+        <a href="#bank">Bank Soal</a>
+        <a href="#etika">Kerahasiaan data</a>
+        <a href="#masalah">Masalah umum</a>
+      </nav>
+    </aside>
+
+    <main class="g-main">
+      <section class="g-hero">
+        <span class="kicker">Untuk admin / HR</span>
+        <h1>Panduan admin tes tulis</h1>
+        <p>Cara membuat akun kandidat, mengirim undangan, memantau jalannya tes, membaca hasil, sampai mencetak laporan dan rekapitulasi. Disarankan dibaca sekali dari atas ke bawah sebelum dipakai.</p>
+        <div class="flow">
+          <div><b>Buat akun</b>satu per satu atau impor Excel</div>
+          <div><b>Kirim undangan</b>email otomatis, WhatsApp, atau salin</div>
+          <div><b>Kandidat tes</b>formulir data lalu 17 bagian</div>
+          <div><b>Lihat hasil</b>laporan per kandidat, cetak PDF</div>
+          <div><b>Rekapitulasi</b>bandingkan, unduh Excel, cetak</div>
+        </div>
+      </section>
+
+      <section class="g-sec" id="gambaran">
+        <h2><span class="no">1</span>Gambaran umum</h2>
+        <p>Sistem terdiri dari dua halaman web:</p>
+        <ul>
+          <li><b>Halaman peserta</b> (<span class="kw">index.html</span>): dipakai kandidat untuk login dan mengerjakan tes.</li>
+          <li><b>Halaman admin</b> (<span class="kw">admin.html</span>): dipakai HR. Menu: <b>Kandidat</b>, <b>Rekapitulasi</b>, <b>Bank Soal</b>, <b>Akun</b>.</li>
+        </ul>
+        <p>Semua data tersimpan di Google Sheet milik HR. Soal, kunci jawaban, dan poin penilaian hanya ada di sisi server dan tidak pernah dikirim ke halaman peserta.</p>
+        <h3>Apa yang diukur</h3>
+        <div class="g-tbl-wrap"><table class="g-tbl">
+          <thead><tr><th>Kelompok</th><th>Isi</th><th>Masuk nilai?</th></tr></thead>
+          <tbody>
+            <tr><td class="nw">Soft skill</td><td>9 aspek situasi kerja, ketelitian teks, mengetik, dan Kraepelin (hitung cepat). Soft skill = rata-rata 12 komponen ini.</td><td>Ya (65%)</td></tr>
+            <tr><td class="nw">Hard skill</td><td>25 soal pilihan ganda sesuai posisi, lulus bila nilai ≥ 80.</td><td>Ya (35%)</td></tr>
+            <tr><td class="nw">Profil</td><td>DISC, MBTI, Gaya Kepemimpinan, Gambaran Sifat, dan isi Formulir Data Pelamar.</td><td>Tidak, hanya deskriptif</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note tip"><div>Kandidat yang akunnya dibuat <b>sebelum versi 3</b> tetap dinilai dengan aturan lama: soal hard skill lama (20 soal, 10 menit, lulus ≥ 85), tanpa formulir data pelamar dan tanpa tes mengetik.</div></div>
+      </section>
+
+      <section class="g-sec" id="masuk">
+        <h2><span class="no">2</span>Masuk dan keamanan akun</h2>
+        <ol class="st">
+          <li><b>Buka halaman admin</b>(alamat web tes, diakhiri <span class="kw">admin.html</span>), lalu isi username dan password admin yang diberikan pengelola sistem.</li>
+          <li><b>Ganti password segera</b>lewat menu <b>Akun</b>: isi password lama, lalu password baru (minimal 8 karakter). Username juga boleh diganti.</li>
+          <li><b>Keluar</b>dengan tombol <span class="btn-ex g">Keluar</span> di pojok kanan atas setiap selesai memakai, terutama di komputer bersama.</li>
+        </ol>
+        <ul>
+          <li>Hanya ada <b>satu akun admin</b>. Jangan membagikan password kepada orang lain.</li>
+          <li>Sesi login berakhir otomatis setelah beberapa jam. Jika diminta login ulang, itu normal.</li>
+          <li>Salah memasukkan password berulang kali (8 kali) mengunci login selama 15 menit.</li>
+          <li>Lupa password? Hubungi pengelola sistem (IT) untuk mengatur ulang dari sisi Apps Script.</li>
+        </ul>
+      </section>
+
+      <section class="g-sec" id="tambah">
+        <h2><span class="no">3</span>Menambah kandidat satu per satu</h2>
+        <ol class="st">
+          <li><b>Menu Kandidat → <span class="btn-ex">Tambah kandidat</span></b></li>
+          <li><b>Isi 4 data saja:</b>nama lengkap, no. HP / WhatsApp, email, dan posisi yang dilamar. Data lain (KTP, pendidikan, riwayat kerja, harapan gaji) diisi kandidat sendiri lewat Formulir Data Pelamar.</li>
+          <li><b>Posisi menentukan otomatis</b>profil DISC jabatan dan paket soal hard skill (25 soal). Paket bisa diganti atau dikosongkan bila perlu, misalnya untuk posisi tanpa tes teknis.</li>
+          <li><b>Biarkan kotak “Kirim undangan otomatis ke email” tercentang</b>bila ingin undangan langsung dikirim, lalu tekan <span class="btn-ex">Buat akun tes</span>.</li>
+          <li><b>Dialog akun tes</b>menampilkan username, password, dan masa berlaku. Dari sini undangan bisa dikirim lewat email, WhatsApp, atau disalin.</li>
+        </ol>
+        <div class="note warn"><div><b>Akun berlaku 3 hari</b> sejak dibuat dan hanya untuk satu kali tes. Buat akun mendekati hari undangan dikirim. Kandidat yang masa berlakunya habis bisa diberi tombol <span class="btn-ex g">Perpanjang</span> (diperpanjang 3 hari lagi dari saat itu).</div></div>
+      </section>
+
+      <section class="g-sec" id="impor">
+        <h2><span class="no">4</span>Impor banyak kandidat dari Excel</h2>
+        <p>Cocok bila ada banyak pelamar sekaligus. Posisi dipilih dari daftar dropdown di Excel, sehingga tidak ada salah ketik.</p>
+        <ol class="st">
+          <li><b>Menu Kandidat → <span class="btn-ex g">Impor Excel</span> → Unduh template Excel.</b></li>
+          <li><b>Isi sheet “Data Kandidat”</b>mulai baris 2, satu baris per kandidat: <i>Nama Lengkap</i>, <i>No. HP / WhatsApp</i>, <i>Email</i>, dan <i>Posisi yang Dilamar</i> (klik sel, pilih dari panah dropdown). Maksimal 300 baris per file. Jangan mengubah baris judul, nama sheet, atau sheet “Daftar Posisi”.</li>
+          <li><b>Simpan sebagai .xlsx</b>lalu unggah di halaman impor (klik kotak atau tarik file ke sana).</li>
+          <li><b>Periksa pratinjau.</b>Baris bermasalah ditandai merah dan <b>tidak ikut dibuat</b>. Posisi yang salah bisa langsung dipilih ulang dari dropdown di pratinjau; masalah lain (nama kosong, email salah, dobel) diperbaiki di Excel lalu unggah ulang.</li>
+          <li><b>Tentukan kirim email atau tidak</b>lewat kotak centang, lalu tekan <span class="btn-ex">Buat … akun</span>. Jangan menutup halaman sampai muncul hasilnya.</li>
+          <li><b>Baca hasil.</b>Tabel berisi username, password, dan status email tiap kandidat. Simpan dengan <span class="btn-ex g">Unduh daftar akun (Excel)</span>.</li>
+        </ol>
+        <h3>Yang dicek sistem</h3>
+        <ul>
+          <li>Nama dan posisi wajib; no. HP minimal 9 angka; email (bila diisi) harus berformat benar.</li>
+          <li>No. HP dirapikan otomatis: <span class="kw">+62…</span>, <span class="kw">62…</span>, atau angka tanpa 0 di depan menjadi <span class="kw">08…</span>.</li>
+          <li><b>Dobel:</b> kandidat dengan no. HP dan posisi yang sama dengan data yang sudah ada (atau dengan baris lain di file yang sama) dilewati.</li>
+        </ul>
+        <div class="note warn"><div>Berkas hasil impor (dan unduhan daftar akun) berisi <b>username dan password</b> kandidat. Simpan di tempat yang aman dan hapus setelah undangan terkirim.</div></div>
+      </section>
+
+      <section class="g-sec" id="undangan">
+        <h2><span class="no">5</span>Mengirim undangan</h2>
+        <h3>Lewat email (otomatis)</h3>
+        <p>Email dikirim dari <b>akun Google pemilik backend</b> dengan nama pengirim “HR Granostic Center”. Isinya: tombol <i>Mulai tes</i>, username, password, masa berlaku, dan petunjuk singkat. Alamat pengirim dan sisa kuota harian tampil di halaman impor.</p>
+        <ul>
+          <li><b>Kuota harian Google</b> terbatas: sekitar 100 email/hari untuk Gmail biasa dan sekitar 1.500 untuk Google Workspace. Bila kuota habis, akun tetap dibuat dan emailnya ditandai gagal; kirim ulang besok atau lewat WhatsApp.</li>
+          <li><b>Email gagal tidak membatalkan akun.</b> Di tabel hasil impor ada tombol <span class="btn-ex">Kirim ulang</span>. Untuk kandidat lama, buka tombol <span class="btn-ex g">Undangan</span> pada barisnya, isi/perbaiki email, lalu <span class="btn-ex">Kirim ke email</span>.</li>
+          <li>Email dapat masuk folder <b>Spam</b> penerima. Sarankan kandidat memeriksanya.</li>
+        </ul>
+        <h3>Lewat WhatsApp atau salin pesan</h3>
+        <p>Di tombol <span class="btn-ex g">Undangan</span> tersedia <b>Kirim lewat WhatsApp</b> (membuka WhatsApp dengan pesan siap kirim; Anda tinggal menekan kirim), <b>Salin pesan undangan</b>, dan <b>Salin username &amp; password</b>. WhatsApp tidak bisa dikirim otomatis oleh sistem.</p>
+        <div class="note tip"><div>Beri tahu kandidat untuk <b>membaca halaman Panduan Peserta</b> (<span class="kw">panduan-kandidat.html</span>) sebelum tes. Tautannya juga ada di halaman login peserta.</div></div>
+      </section>
+
+      <section class="g-sec" id="pantau">
+        <h2><span class="no">6</span>Memantau kandidat</h2>
+        <p>Menu <b>Kandidat</b> menampilkan semua akun beserta status dan tombol aksinya. Gunakan kotak pencarian untuk mencari nama atau username.</p>
+        <div class="g-tbl-wrap"><table class="g-tbl">
+          <thead><tr><th class="nw">Status</th><th>Artinya</th></tr></thead>
+          <tbody>
+            <tr><td class="nw"><span class="badge-ex">Belum mulai</span></td><td>Akun dibuat, kandidat belum login atau belum mengerjakan bagian tes.</td></tr>
+            <tr><td class="nw"><span class="badge-ex ok" style="background:#E6F5F6;color:#0B7F86">Sedang tes</span></td><td>Kandidat sedang mengerjakan. Keterangan “x dari y bagian” menunjukkan kemajuannya.</td></tr>
+            <tr><td class="nw"><span class="badge-ex ok">Selesai</span></td><td>Semua bagian terkirim. Hasil siap dilihat.</td></tr>
+            <tr><td class="nw"><span class="badge-ex bad">Kedaluwarsa</span></td><td>Masa berlaku habis sebelum kandidat memulai. Gunakan <b>Perpanjang</b> atau buat akun baru.</td></tr>
+            <tr><td class="nw"><span class="badge-ex" style="background:#FDF3E1;color:#A9690F">Tidak tuntas</span></td><td>Sudah mulai tetapi masa berlaku habis sebelum semua bagian selesai. Hasil sebagian tetap bisa dilihat.</td></tr>
+          </tbody>
+        </table></div>
+        <h3>Tombol di setiap baris</h3>
+        <ul>
+          <li><span class="btn-ex">Lihat hasil</span>: laporan lengkap (muncul setelah kandidat mulai tes).</li>
+          <li><span class="btn-ex g">Formulir</span>: Formulir Data Pelamar yang diisi kandidat, bisa dicetak dengan tanda tangan digital.</li>
+          <li><span class="btn-ex g">Undangan</span>: lihat akun, kirim email/WhatsApp, salin pesan.</li>
+          <li><span class="btn-ex g">Ubah</span>: koreksi nama, HP, email, posisi, atau paket hard skill. Posisi dan paket hanya bisa diganti selama tes belum dimulai.</li>
+          <li><span class="btn-ex g">Perpanjang</span>: masa berlaku diperpanjang 3 hari dari sekarang.</li>
+          <li><span class="btn-ex g" style="color:#B23A34">Hapus</span>: menghapus akun <b>beserta semua jawaban, log, dan formulirnya</b>. Tidak bisa dibatalkan. Jangan menghapus baris Sheet secara manual.</li>
+        </ul>
+        <p>Kolom <b>Keluar halaman</b> menunjukkan berapa kali kandidat berpindah tab/aplikasi saat tes dan total durasinya. Ini informasi, bukan hukuman otomatis; nilai tidak dikurangi.</p>
+        <p>Label <b>Formulir terisi / Formulir belum</b> menunjukkan apakah kandidat sudah mengirim Formulir Data Pelamar. Kandidat tidak bisa memulai tes sebelum formulir terkirim.</p>
+      </section>
+
+      <section class="g-sec" id="hasil">
+        <h2><span class="no">7</span>Membaca hasil kandidat</h2>
+        <p>Klik <span class="btn-ex">Lihat hasil</span>. Laporan memuat ringkasan nilai, rincian tiap komponen, profil, jawaban, dan catatan perilaku selama tes. Tombol <span class="btn-ex">Cetak / simpan PDF</span> menghasilkan laporan siap arsip.</p>
+        <div class="g-tbl-wrap"><table class="g-tbl">
+          <thead><tr><th class="nw">Bagian laporan</th><th>Cara membaca</th></tr></thead>
+          <tbody>
+            <tr><td class="nw">Nilai akhir</td><td>35% hard skill + 65% soft skill. Tanpa hard skill, 100% soft skill. <b>Direkomendasikan ≥ 70</b>, <b>Dipertimbangkan 60–69</b>, <b>Tidak direkomendasikan &lt; 60</b>.</td></tr>
+            <tr><td class="nw">Soft skill</td><td>Rata-rata 12 komponen (9 aspek situasi kerja + ketelitian + mengetik + Kraepelin). Aspek: Sangat Baik ≥ 80, Baik 65–79, Cukup 50–64, Kurang &lt; 50.</td></tr>
+            <tr><td class="nw">Hard skill</td><td>Nilai, jumlah benar, dan status lulus (≥ 80; kandidat lama ≥ 85). Rincian jawaban per soal tampil di bagian bawah laporan.</td></tr>
+            <tr><td class="nw">Mengetik</td><td>Kata/menit bersih dan kotor, kata/detik, akurasi, progres teks, dan jenis perangkat (PC/laptop atau HP/tablet). Nilai = 70% kecepatan + 30% akurasi. Tanda <b>cek tempel</b> berarti ada indikasi teks ditempel atau diisi otomatis; periksa kewajarannya.</td></tr>
+            <tr><td class="nw">Kraepelin</td><td>Kecepatan, ketelitian, keajegan, dan ketahanan kerja. Acuan internal, bukan norma baku.</td></tr>
+            <tr><td class="nw">DISC, MBTI, Gaya Kepemimpinan, Sifat</td><td>Deskriptif untuk bahan wawancara. Tidak masuk perhitungan nilai. DISC dibandingkan dengan profil jabatan (Sangat Sesuai, Sesuai, Cukup Sesuai, Kurang Sesuai).</td></tr>
+            <tr><td class="nw">Keluar halaman</td><td>Jumlah dan lama kandidat meninggalkan halaman tes.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note warn"><div><b>Hasil adalah alat bantu, bukan satu-satunya dasar keputusan.</b> Gunakan bersama wawancara, referensi, dan penilaian kompetensi lain. Untuk bank soal medis dan farmasi, disarankan ditinjau praktisi bidangnya secara berkala.</div></div>
+      </section>
+
+      <section class="g-sec" id="rekap">
+        <h2><span class="no">8</span>Rekapitulasi</h2>
+        <p>Menu <b>Rekapitulasi</b> menampilkan semua kandidat dalam satu tabel: tanggal tes, status, nilai akhir, soft skill, hard skill, mengetik, DISC, MBTI, dan jumlah keluar halaman. Di atasnya ada ringkasan jumlah kandidat, yang selesai, yang direkomendasikan, dan yang lulus hard skill.</p>
+        <ul>
+          <li><b>Filter:</b> cari nama/username, pilih posisi, status, atau hasil hard skill (lulus / tidak lulus). Ringkasan dan tabel mengikuti filter.</li>
+          <li><span class="btn-ex g">Unduh Excel (CSV)</span>: berisi lebih banyak kolom (termasuk sumber lowongan, kisaran gaji dari sumber, harapan gaji, email, dan hasil mengetik). Buka dengan Excel; bila kolom menyatu, gunakan <i>Data → From Text/CSV</i> dan pilih pemisah koma.</li>
+          <li><span class="btn-ex">Cetak rekap</span>: cetak atau simpan PDF sesuai tampilan filter saat ini.</li>
+        </ul>
+      </section>
+
+      <section class="g-sec" id="bank">
+        <h2><span class="no">9</span>Bank Soal</h2>
+        <p>Untuk melihat soal yang diterima kandidat. Pilih posisi atau jenis tes, baca soalnya, lalu geser <b>Tampilkan kunci</b> untuk memperlihatkan atau menyembunyikan kunci jawaban. Tombol <span class="btn-ex g">Unduh PDF</span> menghasilkan dokumen soal, dengan atau tanpa kunci sesuai posisi saklar saat itu.</p>
+        <div class="note stop"><div><b>Rahasia.</b> Kunci jawaban jangan dibagikan atau dicetak berlebihan. Jangan menunjukkan layar Bank Soal saat kandidat berada di dekat Anda.</div></div>
+      </section>
+
+      <section class="g-sec" id="etika">
+        <h2><span class="no">10</span>Menjaga kerahasiaan data</h2>
+        <ul>
+          <li>Data kandidat (identitas, riwayat kerja, harapan gaji, tanda tangan) bersifat <b>pribadi</b>. Akses hanya untuk tim seleksi yang berkepentingan.</li>
+          <li>Jangan mengirim hasil tes, laporan PDF, atau rekap lewat grup percakapan umum. Kirim langsung ke pihak yang berwenang.</li>
+          <li>Daftar kandidat menampilkan password akun tes. Jangan membukanya di layar yang dilihat orang lain.</li>
+          <li>Hapus kandidat yang sudah tidak diperlukan sesuai kebijakan retensi data perusahaan.</li>
+          <li>Pastikan Google Sheet backend hanya dibagikan kepada orang yang memang perlu mengaksesnya.</li>
+          <li>Isi tes (soal dan kunci) tidak boleh diberikan kepada kandidat atau pihak luar.</li>
+        </ul>
+      </section>
+
+      <section class="g-sec" id="masalah">
+        <h2><span class="no">11</span>Masalah yang sering muncul</h2>
+        <div class="g-tbl-wrap"><table class="g-tbl">
+          <thead><tr><th>Masalah</th><th>Penanganan</th></tr></thead>
+          <tbody>
+            <tr><td>Kandidat tidak bisa login</td><td>Cek status. <b>Kedaluwarsa</b>: tekan Perpanjang. <b>Selesai</b>: akun tidak bisa dipakai lagi. Pastikan username/password disalin persis, tanpa spasi.</td></tr>
+            <tr><td>Kandidat terputus di tengah tes</td><td>Minta masuk lagi dengan akun yang sama dan melanjutkan. Waktu bagian tetap berjalan selama terputus, dan jawaban yang sudah tersimpan tetap ada.</td></tr>
+            <tr><td>Kandidat tidak bisa mulai tes</td><td>Formulir Data Pelamar belum dikirim. Minta ia menyelesaikan formulir terlebih dahulu.</td></tr>
+            <tr><td>Kandidat salah isi formulir</td><td>Masih bisa diperbaiki selama tes belum dimulai. Setelah dimulai, formulir terkunci.</td></tr>
+            <tr><td>Salah posisi saat membuat akun</td><td>Pakai <b>Ubah</b> selama tes belum dimulai. Bila sudah mulai, buat akun baru dan hapus yang lama.</td></tr>
+            <tr><td>Email undangan gagal</td><td>Periksa alamat email, lalu <b>Kirim ulang</b>. Bila pesan “kuota habis”, tunggu besok atau pakai WhatsApp. Bila muncul “Izin kirim email belum aktif”, hubungi pengelola sistem.</td></tr>
+            <tr><td>Email tidak sampai</td><td>Minta kandidat memeriksa Spam/Promosi; atau kirim lewat WhatsApp.</td></tr>
+            <tr><td>Impor Excel ditolak “judul kolom tidak ditemukan”</td><td>Gunakan template terbaru dari tombol unduh dan jangan mengubah baris judul.</td></tr>
+            <tr><td>Muncul pesan “Koneksi ke server gagal”</td><td>Periksa internet, muat ulang halaman (Ctrl + F5). Bila berulang, hubungi pengelola sistem.</td></tr>
+            <tr><td>Diminta login ulang</td><td>Sesi admin berakhir otomatis. Login kembali.</td></tr>
+            <tr><td>Tampilan admin terasa lama/belum terbarui</td><td>Tekan <b>Muat ulang</b> di halaman, atau Ctrl + F5.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note tip"><div>Kendala teknis di sisi server (Apps Script, izin Google, deployment) ditangani pengelola sistem. Panduan pemasangan dan perawatan ada pada berkas <b>PANDUAN-DEPLOY</b>, bukan di halaman ini.</div></div>
+      </section>
+
+      <p class="g-foot">HR Granostic Center · PT Persada Medika Utama</p>
+    </main>
+  </div>
+  <script src="assets/panduan.js"></script>
+</body>
+</html>

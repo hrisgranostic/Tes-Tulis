@@ -1,0 +1,120 @@
+/* Halaman panduan (kandidat & admin) — dipakai bersama app.css */
+body.guide { background: var(--paper); }
+.g-top { background: var(--white); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 20; }
+.g-top-in { max-width: 1080px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; gap: 14px; }
+.g-top img { height: 30px; width: auto; display: block; }
+.g-top .sp { flex: 1; }
+.g-top .btn { min-height: 38px; padding: 0 16px; font-size: .88rem; }
+.g-top .short { display: none; }
+@media (max-width: 640px) { .g-top .short { display: inline; } }
+
+.g-wrap { max-width: 1080px; margin: 0 auto; padding: 28px 20px 80px; display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 44px; align-items: start; }
+.g-toc { position: sticky; top: 78px; font-size: .9rem; }
+.g-toc b { display: block; font-size: .78rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.g-toc a { display: block; padding: 6px 12px; margin-left: -12px; border-left: 2px solid var(--line); color: var(--muted); text-decoration: none; line-height: 1.35; }
+.g-toc a:hover, .g-toc a.on { color: var(--teal-strong); border-left-color: var(--teal); background: var(--teal-soft); }
+
+.g-main { min-width: 0; }
+.g-hero { margin-bottom: 30px; }
+.g-hero .kicker { display: inline-block; font-size: .8rem; font-weight: 500; color: var(--teal-strong); background: var(--teal-soft); padding: 3px 12px; border-radius: 999px; margin-bottom: 12px; }
+.g-hero h1 { font-size: 2.05rem; font-weight: 500; letter-spacing: -.02em; margin-bottom: 10px; }
+.g-hero p { color: var(--muted); max-width: 62ch; font-size: 1.04rem; }
+.g-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 22px 0 0; }
+.g-facts div { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 16px; }
+.g-facts b { display: block; font-size: 1.15rem; font-weight: 500; }
+.g-facts span { font-size: .82rem; color: var(--muted); }
+
+.g-sec { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 26px 28px; margin-bottom: 18px; scroll-margin-top: 80px; }
+.g-sec > h2 { display: flex; gap: 12px; align-items: center; font-size: 1.3rem; margin-bottom: 14px; }
+.g-sec > h2 .no { flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--teal); color: #fff; display: grid; place-items: center; font-size: .92rem; font-weight: 500; }
+.g-sec h3 { margin: 22px 0 8px; font-size: 1.03rem; }
+.g-sec p:last-child, .g-sec ul:last-child, .g-sec ol:last-child { margin-bottom: 0; }
+.g-sec ul, .g-sec ol { padding-left: 1.25em; margin: 0 0 1em; }
+.g-sec li { margin-bottom: .4em; }
+.g-sec li::marker { color: var(--teal); }
+
+ol.st { list-style: none; padding: 0; counter-reset: s; display: grid; gap: 12px; }
+ol.st > li { counter-increment: s; position: relative; padding: 2px 0 2px 44px; margin: 0; }
+ol.st > li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--teal-soft); color: var(--teal-strong); display: grid; place-items: center; font-weight: 500; font-size: .9rem; }
+ol.st > li b:first-child::after { content: " "; }
+
+.note { display: flex; gap: 12px; padding: 13px 16px; border-radius: 10px; margin: 16px 0; font-size: .95rem; line-height: 1.5; }
+.note::before { content: ""; flex: none; width: 4px; border-radius: 4px; background: currentColor; }
+.note.tip { background: var(--teal-soft); color: var(--teal-strong); }
+.note.warn { background: var(--amber-soft); color: var(--amber); }
+.note.stop { background: var(--red-soft); color: var(--red); }
+.note > div { color: var(--ink); }
+.note b { color: inherit; }
+.note.tip b, .note.warn b, .note.stop b { color: inherit; }
+
+.g-tbl-wrap { overflow-x: auto; margin: 12px 0 4px; border: 1px solid var(--line); border-radius: 10px; }
+table.g-tbl { width: 100%; border-collapse: collapse; font-size: .93rem; }
+.g-tbl th, .g-tbl td { padding: 10px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.g-tbl th { background: #F7FAFA; font-weight: 500; font-size: .82rem; color: var(--muted); white-space: nowrap; }
+.g-tbl tr:last-child td { border-bottom: 0; }
+.g-tbl td.nw, .g-tbl th.nw { white-space: nowrap; }
+.g-tbl tr.tot td { background: var(--teal-soft); font-weight: 500; }
+
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 12px 0; }
+.cols > div { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.cols h3 { margin-top: 0; }
+.cols.do > div:first-child { border-color: #BFDFC9; background: var(--green-soft); }
+.cols.do > div:last-child { border-color: #E7C3C0; background: var(--red-soft); }
+.cols ul { margin-bottom: 0; }
+
+kbd, .kw { font-family: inherit; font-size: .88em; font-weight: 500; background: #EEF3F4; border: 1px solid var(--line); border-radius: 6px; padding: 1px 8px; white-space: nowrap; }
+.btn-ex { display: inline-block; font-size: .85em; font-weight: 500; padding: 1px 12px; border-radius: 999px; background: var(--teal); color: #fff; white-space: nowrap; }
+.btn-ex.g { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+.badge-ex { display: inline-block; font-size: .8em; padding: 1px 10px; border-radius: 999px; background: #EEF1F4; color: var(--muted); white-space: nowrap; }
+.badge-ex.ok { background: var(--green-soft); color: var(--green); }
+.badge-ex.bad { background: var(--red-soft); color: var(--red); }
+
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 14px 0 4px; counter-reset: f; }
+.flow > div { counter-increment: f; background: var(--teal-soft); border-radius: 10px; padding: 12px 12px 12px 14px; font-size: .88rem; line-height: 1.35; position: relative; }
+.flow > div::before { content: counter(f); display: block; width: 24px; height: 24px; border-radius: 50%; background: var(--teal); color: #fff; font-size: .78rem; display: grid; place-items: center; margin-bottom: 8px; }
+.flow b { display: block; font-size: .93rem; margin-bottom: 2px; }
+
+details.faq { border-top: 1px solid var(--line); padding: 2px 0; }
+details.faq:first-of-type { border-top: 0; }
+details.faq summary { cursor: pointer; padding: 12px 28px 12px 0; font-weight: 450; list-style: none; position: relative; }
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::after { content: "+"; position: absolute; right: 4px; top: 8px; font-size: 1.4rem; line-height: 1; color: var(--teal); }
+details.faq[open] summary::after { content: "–"; }
+details.faq > div { padding: 0 0 14px; color: #34414D; }
+details.faq > div p:last-child { margin-bottom: 0; }
+
+.g-foot { margin-top: 28px; text-align: center; font-size: .85rem; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .g-wrap { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 18px; }
+  .g-toc { position: static; margin-bottom: 18px; min-width: 0; }
+  .g-toc b { display: none; }
+  .g-toc nav { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
+  .g-toc a { flex: none; border: 1px solid var(--line); border-radius: 999px; background: var(--white); padding: 6px 14px; margin: 0; white-space: nowrap; }
+  .g-toc a:hover, .g-toc a.on { border-color: var(--teal); }
+}
+@media (max-width: 640px) {
+  .g-hero h1 { font-size: 1.6rem; }
+  .g-facts { grid-template-columns: 1fr; }
+  .g-sec { padding: 20px 18px; border-radius: 12px; }
+  .g-sec > h2 { font-size: 1.15rem; }
+  .cols { grid-template-columns: 1fr; }
+  .flow { grid-template-columns: 1fr 1fr; }
+  .g-top .long { display: none; }
+  .g-top .btn { padding: 0 12px; }
+  .g-tbl th, .g-tbl td { padding: 8px 10px; }
+}
+
+@media print {
+  @page { size: A4; margin: 16mm 14mm; }
+  body.guide { background: #fff; font-size: 11pt; }
+  .g-top, .g-toc, .noprint { display: none !important; }
+  .g-wrap { display: block; padding: 0; max-width: none; }
+  .g-sec { border: 0; border-radius: 0; padding: 0; margin: 0 0 14pt; break-inside: auto; }
+  .g-sec > h2 { break-after: avoid; }
+  .g-sec h3, .note, .g-tbl tr, .cols > div, ol.st > li, .flow > div { break-inside: avoid; }
+  .g-hero { margin-bottom: 14pt; }
+  .g-tbl-wrap { overflow: visible; }
+  a { color: inherit; text-decoration: none; }
+  details.faq > div { display: block; }
+}
