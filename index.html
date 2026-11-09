@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Tes Tulis Granostic</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Lexend:wght@300;350;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/app.css">
+  <link rel="stylesheet" href="assets/peserta.css">
+</head>
+<body class="peserta">
+  <header class="bar" id="bar">
+    <div class="bar-in">
+      <img src="assets/logo.png" alt="Granostic" class="bar-logo">
+      <div class="bar-test hidden" id="barTest">
+        <span class="bar-meta"><span class="bar-sec" id="barSec"></span><span class="save-state" id="saveState"></span></span>
+        <span class="bar-timer tabnum" id="barTimer" role="timer" aria-live="off">--:--</span>
+      </div>
+    </div>
+    <div class="timeline hidden" id="timeline"><i id="timefill"></i></div>
+  </header>
+
+  <main id="app" class="wrap" aria-live="polite">
+    <div class="center-load"><div class="spinner"></div></div>
+  </main>
+
+  <div id="watermark" aria-hidden="true"></div>
+  <div id="shield" class="hidden" aria-hidden="true">
+    <div><strong>Halaman tes disembunyikan</strong><br>Kembali ke halaman ini untuk melanjutkan.</div>
+  </div>
+  <noscript>Aktifkan JavaScript untuk mengikuti tes.</noscript>
+
+  <script src="config.js"></script>
+  <script src="assets/common.js"></script>
+  <script src="assets/jeda.js"></script>
+  <script src="assets/biodata.js"></script>
+  <script src="assets/peserta.js"></script>
+</body>
+</html>
