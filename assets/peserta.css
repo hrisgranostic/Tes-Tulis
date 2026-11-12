@@ -261,3 +261,11 @@ body.kt-mode .wrap { max-width: 860px; padding-top: 14px; }
 
 .guide-link { margin: 10px 0 0; font-size: .92rem; }
 .guide-link a { font-weight: 500; }
+
+/* Kesediaan & minat posisi (formulir langkah 1) */
+.yn-grid.yn-one { grid-template-columns: 1fr; }
+.yn-one fieldset.inline { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.yn-one fieldset.inline legend { flex: 1 1 100%; float: none; }
+.multi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+@media (max-width: 560px) { .multi-grid { grid-template-columns: 1fr; } }
+fieldset.multi legend .hint { display: block; font-style: normal; font-size: .85rem; color: var(--muted); margin-top: 2px; }

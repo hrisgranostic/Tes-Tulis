@@ -288,3 +288,4 @@ table.f-tbl, table.f-grid { width: 100%; border-collapse: collapse; font-size: .
 .bad-row td { background: #FFF8F7; }
 .imp-sel { margin-top: 4px; max-width: 260px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font: inherit; font-size: .88rem; }
 .nw { white-space: nowrap; }
+.f-h2 { font-size: .92rem; margin: 14px 0 6px; color: var(--navy); break-after: avoid; }

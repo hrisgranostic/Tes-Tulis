@@ -1,3 +1,8 @@
+/*
+ * Tes Tulis Granostic © 2026 PT Persada Medika Utama.
+ * Dibangun oleh Tim IT PT Persada Medika Utama. Dirancang oleh Deiky Catur Hadi.
+ * Seluruh hak cipta dilindungi.
+ */
 /* Halaman admin: kelola kandidat, lihat & cetak hasil, rekapitulasi */
 (function () {
   var api = GT.api, esc = GT.esc, tgl = GT.tgl;
@@ -22,6 +27,7 @@
   // ================= LOGIN =================
   function viewLogin(msg) {
     document.getElementById('top').classList.add('hidden');
+    document.body.classList.add('at-login');
     $app.innerHTML =
       '<section class="login-box">' +
       '<img src="assets/logo.png" alt="Granostic">' +
@@ -54,6 +60,7 @@
     call('adminMeta').then(function (m) {
       A.meta = m; A.user = m.user;
       document.getElementById('top').classList.remove('hidden');
+      document.body.classList.remove('at-login');
       route();
     }).catch(function (e) { if (!e.auth) viewLogin(e.message); });
   }

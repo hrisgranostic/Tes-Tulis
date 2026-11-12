@@ -157,6 +157,14 @@
       '<tr><th>Alamat KTP</th><td colspan="3">' + v(p.alamat_ktp) + '</td></tr>' +
       '<tr><th>Alamat domisili</th><td colspan="3">' + v(p.alamat_domisili) + '</td></tr></table>';
 
+    var ks = d.kesediaan || null;
+    if (ks) {
+      h += '<h3 class="f-h2">Kesediaan & minat posisi lain</h3><table class="f-tbl yn">' +
+        row2('Bersedia ditugaskan di luar kota', ks.tugas_luar_kota, 'Bersedia penempatan di luar kota', ks.penempatan_luar_kota) +
+        row2('Bersedia ditugaskan untuk lembur', ks.lembur, 'Bersedia kerja bergiliran (shift)', ks.shift) +
+        '<tr><th>Bersedia menerima tugas dari perusahaan / pimpinan</th><td colspan="3">' + v(ks.terima_tugas) + '</td></tr>' +
+        '<tr><th>Posisi lain yang diminati</th><td colspan="3">' + (ks.minat_posisi_lain ? String(ks.minat_posisi_lain).split('; ').map(function (x) { return esc(x); }).join(' &middot; ') : '–') + '</td></tr></table>';
+    }
     var pend = d.pendidikan || [];
     h += '<h2 class="f-h">B. Pendidikan</h2>' + (pend.length ? '<table class="f-grid"><thead><tr><th>Jenjang</th><th>Nama sekolah / kampus</th><th>Jurusan</th><th>Kota</th><th>Tahun</th><th>Nilai</th></tr></thead><tbody>' +
       pend.map(function (x) { return '<tr><td>' + v(x.jenjang) + '</td><td>' + v(x.nama_sekolah) + '</td><td>' + v(x.jurusan) + '</td><td>' + v(x.kota) + '</td><td>' + v(x.tahun_masuk ? x.tahun_masuk + '–' + (x.tahun_lulus || 'sekarang') : (x.tahun_lulus || '')) + '</td><td>' + v(x.nilai) + '</td></tr>'; }).join('') +
@@ -186,7 +194,7 @@
     h += '<h2 class="f-h">E. Tentang kandidat</h2><div class="f-qa">' + QS.map(function (x) {
       return '<div><div class="r-sub">' + esc(x[1]) + '</div><p class="r-p">' + v(q[x[0]]).replace(/\n/g, '<br>') + '</p></div>';
     }).join('') + '</div>';
-    h += '<table class="f-tbl yn">' + row2('Bersedia lembur', q.lembur, 'Bersedia shift', q.shift) + row2('Bersedia ke luar kota', q.luar_kota, 'Bersedia di posisi lain', q.posisi_lain) + '</table>';
+    if (!ks) h += '<table class="f-tbl yn">' + row2('Bersedia lembur', q.lembur, 'Bersedia shift', q.shift) + row2('Bersedia ke luar kota', q.luar_kota, 'Bersedia di posisi lain', q.posisi_lain) + '</table>';
 
     h += '<h2 class="f-h">F. Pernyataan</h2><p class="r-p f-stmt">Dengan ini saya menyatakan bahwa seluruh data dan jawaban yang saya isi dalam formulir ini adalah benar, lengkap, dan dapat dipertanggungjawabkan. ' +
       'Apabila di kemudian hari ditemukan data yang tidak benar, saya bersedia menerima konsekuensi sesuai ketentuan perusahaan, termasuk pembatalan proses rekrutmen atau pemutusan hubungan kerja.</p>';

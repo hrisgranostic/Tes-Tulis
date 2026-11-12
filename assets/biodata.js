@@ -10,6 +10,10 @@
     { v: 'Referensi teman/karyawan Granostic', d: 'Nama & bagian karyawan Granostic' },
     { v: 'Lainnya', d: 'Sebutkan sumbernya (mis. Instagram, kampus, papan pengumuman)' }
   ];
+  var POSISI_PMU = ['Direktur Utama', 'Direktur', 'Finance & Accounting Manager', 'Manajer Medis', 'Sales & Marketing Manager', 'HRGA & IT Manager', 'GP', 'Nurse', 'Admin MCU',
+    'Tenaga Teknis Kefarmasian', 'Radiographer', 'Supervisor Laboratory', 'ATLM', 'Asisten Supervisor Laboratory', 'Marketing', 'Admin Marketing', 'Marketing APD',
+    'Marketing Communication', 'Supervisor Customer Service', 'Customer Service', 'Supervisor GA', 'HR Staff', 'Logistic Staff', 'Waste Controller', 'General Affair Staff',
+    'Driver', 'Dispatch', 'IT Staff', 'Accounting Staff', 'Finance Staff'];
   var STEPS = ['Data pribadi', 'Pendidikan & keahlian', 'Riwayat kerja', 'Lowongan & gaji', 'Tentang Anda', 'Pernyataan'];
   var PERNYATAAN = 'Dengan ini saya menyatakan bahwa seluruh data dan jawaban yang saya isi dalam formulir ini adalah benar, lengkap, dan dapat dipertanggungjawabkan. ' +
     'Apabila di kemudian hari ditemukan data yang tidak benar, saya bersedia menerima konsekuensi sesuai ketentuan perusahaan, termasuk pembatalan proses rekrutmen ' +
@@ -78,6 +82,22 @@
   }
 
   // ---------- langkah ----------
+  function kesediaan() {
+    var me = String((S.kandidat && S.kandidat.posisi) || '').toLowerCase(), pil = get('kesediaan.minat_list') || [];
+    var opts = POSISI_PMU.filter(function (x) { return x.toLowerCase() !== me; });
+    var yn2 = function (k, l) { return radios('kesediaan.' + k, l, ['Ya', 'Tidak'], { cls: 'inline', req: 1 }); };
+    return '<h3 class="sub">Kesediaan</h3><div class="yn-grid yn-one">' +
+      yn2('tugas_luar_kota', 'Bersedia ditugaskan di luar kota?') + yn2('penempatan_luar_kota', 'Bersedia penempatan di luar kota?') +
+      yn2('lembur', 'Bersedia ditugaskan untuk lembur?') + yn2('shift', 'Bersedia kerja bergiliran (shift)?') +
+      yn2('terima_tugas', 'Bersedia menerima tugas-tugas yang diberikan oleh perusahaan dan/atau pimpinan?') + '</div>' +
+      '<h3 class="sub">Posisi lain yang diminati</h3>' +
+      '<fieldset class="f radios multi" id="fsMinat"><legend>Selain posisi yang Anda lamar, posisi apa lagi di PT Persada Medika Utama yang Anda minati?' + req(1) +
+      ' <em class="hint">Pilih minimal 1, boleh lebih dari 1.</em></legend><div class="multi-grid">' +
+      opts.map(function (x) {
+        return '<label class="rd"><input type="checkbox" data-minat value="' + esc(x) + '"' + (pil.indexOf(x) >= 0 ? ' checked' : '') + '><span>' + esc(x) + '</span></label>';
+      }).join('') + '</div></fieldset>';
+  }
+
   function step0() {
     return '<div class="grid2">' +
       input('pribadi.nama_lengkap', 'Nama lengkap (sesuai KTP)', { req: 1, max: 100, cls: 'span2' }) +
@@ -102,7 +122,7 @@
       input('pribadi.darurat_nama', 'Nama', { max: 80 }) +
       input('pribadi.darurat_hubungan', 'Hubungan', { ph: 'mis. Ibu, Suami, Kakak', max: 40 }) +
       input('pribadi.darurat_hp', 'No. HP', { type: 'tel', im: 'tel', max: 20 }) +
-      '</div>';
+      '</div>' + kesediaan();
   }
 
   function step1() {
@@ -167,10 +187,7 @@
       ta('pencapaian', 'Pencapaian apa yang paling Anda banggakan?') +
       ta('masalah', 'Ceritakan masalah terberat yang pernah Anda hadapi dan bagaimana Anda menyelesaikannya.') +
       ta('lingkungan', 'Lingkungan kerja seperti apa yang membuat Anda nyaman dan produktif?') +
-      ta('tekanan', 'Bagaimana cara Anda menghadapi tekanan atau target kerja yang tinggi?') +
-      '<h3 class="sub">Kesediaan</h3><div class="yn-grid">' +
-      yn('pertanyaan.lembur', 'Bersedia lembur bila dibutuhkan?') + yn('pertanyaan.shift', 'Bersedia kerja bergiliran (shift)?') +
-      yn('pertanyaan.luar_kota', 'Bersedia ditugaskan ke luar kota?') + yn('pertanyaan.posisi_lain', 'Bersedia ditempatkan di posisi lain yang sesuai?') + '</div>';
+      ta('tekanan', 'Bagaimana cara Anda menghadapi tekanan atau target kerja yang tinggi?');
   }
 
   function step5() {
@@ -263,6 +280,7 @@
         if (el.getAttribute('data-money')) { v = v.replace(/\D/g, ''); }
         set(p, v);
         el.classList.remove('bad');
+        var fsr = el.closest && el.closest('fieldset'); if (fsr) fsr.classList.remove('bad');
         if (p === 'lowongan.sumber' || p === 'lowongan.kerabat') render();
         if (p === 'pribadi.alamat_ktp' && get('pribadi.domisili_sama')) { set('pribadi.alamat_domisili', v); var d = $root.querySelector('[data-p="pribadi.alamat_domisili"]'); if (d) d.value = v; }
       });
@@ -273,6 +291,14 @@
     });
     $root.querySelectorAll('[data-del]').forEach(function (b) {
       b.onclick = function () { var p = b.getAttribute('data-del').split('.'); S.d[p[0]].splice(Number(p[1]), 1); set(p[0], S.d[p[0]]); render(); };
+    });
+    $root.querySelectorAll('[data-minat]').forEach(function (c) {
+      c.addEventListener('change', function () {
+        var arr = [];
+        $root.querySelectorAll('[data-minat]:checked').forEach(function (x) { arr.push(x.value); });
+        set('kesediaan.minat_list', arr);
+        var fs = document.getElementById('fsMinat'); if (fs) fs.classList.remove('bad');
+      });
     });
     function on(id, fn) { var el = document.getElementById(id); if (el) el.onchange = function () { fn(el.checked); }; }
     on('samaKtp', function (c) {
@@ -295,6 +321,9 @@
     $root.querySelectorAll('[data-req-radio]').forEach(function (fs) {
       if (!get(fs.getAttribute('data-req-radio'))) { fs.classList.add('bad'); miss.push(fs); }
     });
+    if (S.step === 0 && !(get('kesediaan.minat_list') || []).length) {
+      var fm = document.getElementById('fsMinat'); fm.classList.add('bad'); miss.push(fm);
+    }
     if (miss.length) { S.err = 'Masih ada ' + miss.length + ' isian wajib yang kosong (ditandai merah).'; return miss[0]; }
     var nik = get('pribadi.nik');
     if (S.step === 0 && nik && !/^\d{16}$/.test(nik)) { S.err = 'NIK harus 16 digit angka.'; return $root.querySelector('[data-p="pribadi.nik"]'); }
@@ -327,6 +356,10 @@
     d.pekerjaan = d.kerja && d.kerja.fresh ? [] : (d.pekerjaan || []).filter(function (x) { return x && (x.perusahaan || x.posisi); });
     d.pernyataan.setuju = !!d.pernyataan.setuju;
     d.pernyataan.tanggal = new Date().toISOString().slice(0, 10);
+    var ks = d.kesediaan || {};
+    ks.minat_posisi_lain = (ks.minat_list || []).join('; ');
+    delete ks.minat_list;
+    d.kesediaan = ks;
     d.posisi = S.kandidat.posisi;
     return d;
   }

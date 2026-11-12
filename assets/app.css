@@ -100,3 +100,11 @@ input:focus, select:focus, textarea:focus { border-color: var(--teal); outline: 
 .modal { background: var(--white); border-radius: 14px; padding: 26px; width: 100%; max-width: 460px; max-height: calc(100vh - 32px); overflow: auto; box-shadow: var(--shadow); }
 .modal.wide { max-width: 720px; }
 .modal .actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; flex-wrap: wrap; }
+
+/* Hak cipta */
+.copyright { display: block; margin: 0; text-align: center; font-size: 11px; line-height: 1.55; color: #6E7A86; overflow-wrap: anywhere; }
+.copyright span { display: block; }
+.copyright.cr-about { text-align: left; font-size: .92rem; color: var(--muted); }
+.cr-login { display: none; padding: 0 16px calc(18px + env(safe-area-inset-bottom)); }
+body.at-login .cr-login { display: block; }
+body.at-login #app { padding-bottom: 20px; min-height: calc(100vh - 90px); min-height: calc(100svh - 90px); }

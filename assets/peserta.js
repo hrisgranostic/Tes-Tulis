@@ -1,3 +1,8 @@
+/*
+ * Tes Tulis Granostic © 2026 PT Persada Medika Utama.
+ * Dibangun oleh Tim IT PT Persada Medika Utama. Dirancang oleh Deiky Catur Hadi.
+ * Seluruh hak cipta dilindungi.
+ */
 /* Halaman peserta: login username + password, konfirmasi identitas, kerjakan bagian demi bagian */
 (function () {
   var api = GT.api, esc = GT.esc;
