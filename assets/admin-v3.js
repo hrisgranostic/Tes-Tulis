@@ -90,6 +90,32 @@
           }).join('') + '</ol></li>';
         }).join('') + '</ol>';
       }).join('');
+    } else if (d.jenis === 'IQ') {
+      var rawo = function (o) { return String(o).indexOf('<svg') === 0 ? '<span class="bq-svg">' + o + '</span>' : esc(o); };
+      meta = d.soal.length + ' soal pilihan ganda (10 deret angka + 12 bergambar) · waktu 12 menit · deskriptif, tidak masuk nilai akhir';
+      body = '<ol class="bq-list">' + d.soal.map(function (q, i) {
+        return '<li class="bq"><p class="bq-t"><span class="bq-n">' + (i + 1) + '.</span>' + esc(q.q) + '</p>' + (q.svg ? '<div class="bq-stem">' + q.svg + '</div>' : '') +
+          '<ol class="bq-o' + (String(q.opts[0]).indexOf('<svg') === 0 ? ' gfx' : '') + '">' + q.opts.map(function (o, j) {
+            return '<li class="' + (j === q.key ? 'key' : '') + '"><span class="L">' + LET[j] + '</span><span>' + rawo(o) + '</span></li>';
+          }).join('') + '</ol>' + (q.aturan ? '<p class="muted key-only" style="margin:4px 0 0;font-size:.85rem">Aturan: ' + esc(q.aturan) + '</p>' : '') + '</li>';
+      }).join('') + '</ol>' +
+        '<div class="key-table"><h3>Kunci jawaban</h3><div class="kt-grid">' + d.soal.map(function (q, i) { return '<span><b>' + (i + 1) + '</b> ' + LET[q.key] + '</span>'; }).join('') + '</div></div>';
+    } else if (d.jenis === 'MOTIF') {
+      meta = d.soal.length + ' pasang pernyataan · 5 dimensi (tiap dimensi muncul 8 kali) · tidak ada jawaban benar/salah';
+      body = '<div class="card soft">' + Object.keys(d.dim).map(function (k) { return '<p class="r-p" style="margin:0 0 4px"><strong>' + esc(d.dim[k].nama) + '.</strong> ' + esc(d.dim[k].desc) + '</p>'; }).join('') + '</div>' +
+        '<ol class="bq-list">' + d.soal.map(function (q, i) {
+          return '<li class="bq"><p class="bq-t"><span class="bq-n">' + (i + 1) + '.</span>Pilih yang lebih menggambarkan diri Anda:</p><ol class="bq-o">' +
+            '<li><span class="L">A</span><span>' + esc(q.a) + ' <em class="muted">(' + esc(d.dim[q.da].nama) + ')</em></span></li>' +
+            '<li><span class="L">B</span><span>' + esc(q.b) + ' <em class="muted">(' + esc(d.dim[q.db].nama) + ')</em></span></li></ol></li>';
+        }).join('') + '</ol>';
+    } else if (d.jenis === 'VALUE') {
+      meta = d.soal.length + ' situasi dilema nilai · tiap pilihan mewakili satu nilai · tidak ada jawaban benar/salah';
+      body = '<div class="card soft">' + Object.keys(d.val).map(function (k) { return '<p class="r-p" style="margin:0 0 4px"><strong>' + esc(d.val[k].nama) + '.</strong> ' + esc(d.val[k].desc) + '</p>'; }).join('') + '</div>' +
+        '<ol class="bq-list">' + d.soal.map(function (q, i) {
+          return '<li class="bq"><p class="bq-t"><span class="bq-n">' + (i + 1) + '.</span>' + esc(q.q) + '</p><ol class="bq-o">' + q.opts.map(function (o, j) {
+            return '<li><span class="L">' + LET[j] + '</span><span>' + esc(o) + ' <em class="muted">(' + esc(d.val[q.v[j]].nama) + ')</em></span></li>';
+          }).join('') + '</ol></li>';
+        }).join('') + '</ol>';
     } else if (d.jenis === 'TEKS') {
       meta = d.soal.length + ' pasang teks · kunci: Sama / Tidak sama';
       body = '<table class="r-tbl bq-teks"><thead><tr><th>No</th><th>Teks kiri</th><th>Teks kanan</th><th class="kcol">Kunci</th></tr></thead><tbody>' +

@@ -289,3 +289,12 @@ table.f-tbl, table.f-grid { width: 100%; border-collapse: collapse; font-size: .
 .imp-sel { margin-top: 4px; max-width: 260px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font: inherit; font-size: .88rem; }
 .nw { white-space: nowrap; }
 .f-h2 { font-size: .92rem; margin: 14px 0 6px; color: var(--navy); break-after: avoid; }
+
+/* Bank soal IQ (SVG) */
+.bq-stem { max-width: 380px; margin: 4px 0 8px 22px; }
+.bq-stem svg { width: 100%; height: auto; display: block; }
+.bq-svg { display: inline-block; width: 74px; vertical-align: middle; }
+.bq-svg svg { width: 100%; height: auto; display: block; }
+.bq-o.gfx { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.bq-o.gfx li { align-items: center; }
+.bank-doc:not(.show-key) .key-only { display: none; }

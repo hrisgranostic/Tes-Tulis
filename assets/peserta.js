@@ -194,6 +194,10 @@
         '<div class="kr-ex-col"><span>6</span><em>0</em><span>4</span><em>3</em><span>9</span></div>' +
         '<p style="margin:0">Mulai dari bawah: 9 + 4 = 13, tekan <strong>3</strong>. Lalu 4 + 6 = 10, tekan <strong>0</strong>. Begitu seterusnya ke atas.</p></div>';
     }
+    if (sec.id === 'IQ') {
+      return '<div class="card contoh"><p class="r-cap">Contoh</p><p class="mono" style="margin:0 0 6px">2, 4, 6, 8, ... ?</p>' +
+        '<p style="margin:0" class="muted">Setiap angka bertambah 2, jadi jawabannya <strong>10</strong>. Untuk soal bergambar, cari pola perubahan bentuk, jumlah, warna, atau arah putarnya.</p></div>';
+    }
     return '';
   }
 
@@ -302,10 +306,13 @@
       (so.tipe === 'skala' ? '<span class="q-part">Bagian ' + it.part + ', skala 1 sampai ' + it.skala + '</span>' : '') + '</div>';
     var body = '';
     if (so.tipe === 'pilihan') {
-      body = '<p class="q-text">' + esc(it.t) + '</p><div class="opts" role="radiogroup">' +
+      var gfx = it.opsi.length && String(it.opsi[0]).indexOf('<svg') === 0;
+      body = '<p class="q-text">' + esc(it.t) + '</p>' + (it.svg ? '<div class="iq-stem">' + it.svg + '</div>' : '') +
+        '<div class="opts' + (gfx ? ' gfx' : '') + '" role="radiogroup">' +
         it.opsi.map(function (o, j) {
           var on = c.jawaban[i] === j;
-          return '<button type="button" class="opt' + (on ? ' on' : '') + '" role="radio" aria-checked="' + on + '" data-v="' + j + '"><span class="k">' + LETTER[j] + '</span><span>' + esc(o) + '</span></button>';
+          var isg = String(o).indexOf('<svg') === 0;
+          return '<button type="button" class="opt' + (on ? ' on' : '') + '" role="radio" aria-checked="' + on + '" aria-label="Pilihan ' + LETTER[j] + '" data-v="' + j + '"><span class="k">' + LETTER[j] + '</span><span>' + (isg ? o : esc(o)) + '</span></button>';
         }).join('') + '</div>';
     } else if (so.tipe === 'ab') {
       body = '<p class="q-text">Pilih pernyataan yang paling sesuai dengan diri Anda.</p><div class="opts" role="radiogroup">' +
@@ -648,16 +655,51 @@
   }
 
   // ================= SELESAI =================
+  function fmtMenit(d) {
+    d = Math.max(0, Math.round(d || 0));
+    if (d < 60) return d <= 0 ? '–' : 'kurang dari 1 menit';
+    var m = Math.floor(d / 60), s = d % 60;
+    return m + ' menit' + (s >= 30 && m < 60 ? ' ' + s + ' detik' : '');
+  }
+
+  /** Ringkasan waktu per bagian (9 bagian Situasi Kerja digabung jadi satu baris). */
+  function resumeWaktu() {
+    var rows = [], sk = null, total = 0;
+    (S.sections || []).forEach(function (s) {
+      var t = s.terpakai || 0; total += t;
+      if (/^SK\d$/.test(s.id)) {
+        if (!sk) { sk = { nama: 'Situasi Kerja', t: 0 }; rows.push(sk); }
+        sk.t += t;
+      } else rows.push({ nama: s.nama, t: t });
+    });
+    var huruf = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    return { total: total, rows: rows.map(function (r, i) { return { nm: 'Tes ' + (huruf[i] || (i + 1)), nama: r.nama, t: r.t }; }) };
+  }
+
   function viewSelesai() {
     stopTest();
     S.active = false;
     try { sessionStorage.removeItem('gt_kode'); } catch (e) {}
+    var J = window.GT_JEDA && window.GT_JEDA.penutup;
+    var quote = J && J.length ? J[Math.floor(Math.random() * J.length)] : '';
+    var rw = resumeWaktu();
+    var tbl = rw.rows.map(function (r) {
+      return '<tr><td class="nm">' + esc(r.nm) + '</td><td>' + esc(r.nama) + '</td><td class="num">' + esc(fmtMenit(r.t)) + '</td></tr>';
+    }).join('');
     $app.innerHTML =
       '<section class="done-hero">' +
       '<div class="done-mark"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>' +
       '<h1>Tes selesai</h1>' +
       '<p>Terima kasih, ' + esc(firstName(S.kandidat && S.kandidat.nama)) + '. Semua jawaban Anda sudah kami terima.</p>' +
-      '<p class="muted">Hasil tes akan diproses oleh tim HR Granostic Center. Anda boleh menutup halaman ini.</p>' +
+      (quote ? '<blockquote class="done-quote">' + esc(quote) + '</blockquote>' : '') +
+      (rw.total > 0 ? '<div class="card done-sum"><p class="r-cap">Ringkasan pengerjaan</p><table><tbody>' + tbl +
+        '<tr class="tot"><td colspan="2">Total waktu pengerjaan</td><td class="num">' + esc(fmtMenit(rw.total)) + '</td></tr></tbody></table></div>' : '') +
+      '<div class="card done-note">' +
+      '<p><strong>Kerahasiaan hasil.</strong> Seluruh hasil tes Anda hanya disimpan oleh PT Persada Medika Utama dan tidak akan disebarluaskan kepada pihak mana pun di luar proses rekrutmen ini.</p>' +
+      '<p><strong>Tahap berikutnya.</strong> Setelah tes tulis online ini, tahap selanjutnya adalah tahap <em>Offering</em>. Tim HR akan menghubungi Anda melalui pesan elektronik (email atau WhatsApp) bila Anda dilanjutkan ke tahap tersebut.</p>' +
+      '<p>Apabila dalam waktu 2 (dua) minggu Anda belum menerima kabar apa pun, kami mohon maaf karena belum dapat melanjutkan proses Anda saat ini. Kami sangat menghargai waktu dan usaha yang telah Anda berikan, dan berharap dapat berjumpa kembali di kesempatan lain.</p>' +
+      '</div>' +
+      '<p class="muted">Anda boleh menutup halaman ini.</p>' +
       '</section>';
     flushLog();
   }

@@ -269,3 +269,22 @@ body.kt-mode .wrap { max-width: 860px; padding-top: 14px; }
 .multi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
 @media (max-width: 560px) { .multi-grid { grid-template-columns: 1fr; } }
 fieldset.multi legend .hint { display: block; font-style: normal; font-size: .85rem; color: var(--muted); margin-top: 2px; }
+
+/* ===== Soal bergambar (IQ) ===== */
+.iq-svg { display: block; width: 100%; height: auto; }
+.iq-stem { margin: 4px 0 14px; max-width: 420px; }
+.iq-stem .iq-one { max-width: 120px; }
+.iq-stem .iq-matrix { max-width: 230px; }
+.opts.gfx { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.opts.gfx .opt { flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 10px; }
+.opts.gfx .opt > span:last-child { width: 100%; max-width: 84px; }
+
+/* ===== Layar akhir: ringkasan, kutipan, catatan ===== */
+.done-quote { margin: 18px 0; padding: 14px 18px; border-left: 4px solid var(--teal); background: var(--teal-soft); border-radius: 0 10px 10px 0; font-size: 1.02rem; line-height: 1.55; }
+.done-sum table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.done-sum td { padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.done-sum td.nm { font-weight: 600; white-space: nowrap; width: 1%; }
+.done-sum td.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.done-sum tr.tot td { border-bottom: 0; font-weight: 600; padding-top: 12px; }
+.done-note p { margin: 0 0 10px; line-height: 1.6; }
+.done-note p:last-child { margin-bottom: 0; }

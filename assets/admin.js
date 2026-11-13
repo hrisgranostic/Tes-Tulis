@@ -611,6 +611,35 @@
     } else h += notTaken();
     h += '</section>';
 
+    // IQ, MOTIF, VALUE (kandidat versi 4)
+    if (B.IQ) {
+      var iq = nz(B.IQ);
+      h += '<section class="r-sec">' + secHead(N() + 'Penalaran (IQ): deret angka & gambar', B.IQ);
+      if (iq) {
+        h += '<div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap;margin-bottom:14px"><div><div class="type-big">' + iq.nilai + '</div><div class="muted" style="font-size:.85rem">Nilai penalaran</div></div>' +
+          '<div class="r-p">' + iq.benar + ' benar dari ' + iq.total + ' soal (' + iq.dijawab + ' dijawab).<br>Deret angka: <strong>' + iq.angka.benar + '/' + iq.angka.total + '</strong>, bentuk bergambar: <strong>' + iq.figural.benar + '/' + iq.figural.total + '</strong>.<br>Kategori: <strong>' + esc(iq.kategori) + '</strong></div></div>';
+        h += '<table class="r-tbl"><thead><tr><th>No</th><th>Jenis</th><th>Hasil</th></tr></thead><tbody>' +
+          iq.rinci.map(function (x) {
+            var j = x.jenis === 'angka' ? 'Deret angka' : 'Bergambar';
+            return '<tr class="' + (x.benar ? '' : 'wrong') + '"><td>' + x.no + '</td><td>' + j + '</td><td>' + (x.pilih == null ? '<span class="muted">Tidak dijawab</span>' : (x.benar ? 'Benar' : 'Salah')) + '</td></tr>';
+          }).join('') + '</tbody></table>';
+        h += '<p class="r-note">Bagian ini bersifat deskriptif dan tidak masuk dalam nilai akhir. Soal dan kunci lengkap ada di menu Bank Soal.</p>';
+      } else h += notTaken();
+      h += '</section>';
+      [['MOTIF', 'Motif (motivasi kerja)', 'Pernyataan dipilih berpasangan; skor = seberapa sering sebuah dorongan dipilih (0–100).'],
+       ['VALUE', 'Value (nilai kerja)', 'Pada tiap situasi kandidat memilih satu tindakan; skor = seberapa sering nilai itu dipilih (0–100).']].forEach(function (m) {
+        var x = nz(B[m[0]]);
+        h += '<section class="r-sec">' + secHead(N() + m[1], B[m[0]]);
+        if (x) {
+          h += '<p class="r-p">Dominan: <strong>' + esc(x.utama.join(' dan ')) + '</strong>. Dijawab ' + x.dijawab + ' dari ' + x.total + '.</p>' +
+            x.skor.map(function (z, i) { return bar(esc(z.nama), z.skor, 100, i < 2, String(z.skor)); }).join('') +
+            '<div class="cols2">' + x.skor.map(function (z) { return '<p class="r-p"><strong>' + esc(z.nama) + '.</strong> ' + esc(z.desc) + '</p>'; }).join('') + '</div>' +
+            '<p class="r-note">' + m[2] + ' Gambaran kecenderungan, bukan penilaian benar atau salah.</p>';
+        } else h += notTaken();
+        h += '</section>';
+      });
+    }
+
     // HS
     if (k.paket_hs) {
       h += '<section class="r-sec">' + secHead(N() + 'Pengetahuan teknis (hard skill): ' + k.paket_nama, B.HS);
@@ -668,7 +697,7 @@
   }
   function isLeave(l) { return /keluar/i.test(l.kejadian); }
   function secName(id) {
-    var m = { DISC: 'DISC', MBTI: 'MBTI', GK: 'Gaya kepemimpinan', SIFAT: 'Sifat', HS: 'Hard skill', TEKS: 'Ketelitian', KETIK: 'Mengetik', KRAEP: 'Kraepelin' };
+    var m = { DISC: 'DISC', MBTI: 'MBTI', GK: 'Gaya kepemimpinan', SIFAT: 'Sifat', HS: 'Hard skill', TEKS: 'Ketelitian', KETIK: 'Mengetik', KRAEP: 'Kraepelin', IQ: 'Penalaran (IQ)', MOTIF: 'Motif', VALUE: 'Value' };
     if (/^SK\d$/.test(id)) { var x = A.meta.sections.filter(function (s) { return s.id === id; })[0]; return x ? x.label : id; }
     return m[id] || '–';
   }

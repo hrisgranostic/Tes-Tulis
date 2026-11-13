@@ -52,3 +52,24 @@ window.GT_JEDA = {
   "Ingat satu hal yang membuatmu tersenyum hari ini, lalu bawa ke soal berikutnya."
  ]
 };
+
+/* Kalimat penutup (dipilih acak di layar akhir tes). © 2026 PT Persada Medika Utama. */
+window.GT_JEDA.penutup = [
+  "Setiap langkah kecil yang Anda selesaikan hari ini adalah investasi untuk karier Anda esok.",
+  "Kesungguhan Anda mengerjakan tes ini sudah menunjukkan kualitas yang berharga.",
+  "Peluang terbaik biasanya datang kepada mereka yang siap dan tetap tenang.",
+  "Apa pun hasilnya, keberanian Anda untuk mencoba adalah awal dari pertumbuhan.",
+  "Karier yang kuat dibangun dari konsistensi, bukan dari satu hari yang sempurna.",
+  "Anda sudah melakukan bagian Anda dengan baik. Sisanya, percayakan pada proses.",
+  "Setiap pengalaman melamar kerja membuat Anda semakin matang dan percaya diri.",
+  "Bekerjalah dengan integritas, dan pintu-pintu yang tepat akan terbuka pada waktunya.",
+  "Ketekunan hari ini adalah modal keberhasilan Anda di masa depan.",
+  "Kemampuan bisa dilatih, sikap yang baik dibawa ke mana saja. Teruslah mengembangkan keduanya.",
+  "Hasil yang baik lahir dari persiapan yang tulus, dan Anda sudah menunjukkannya hari ini.",
+  "Langkah Anda hari ini membuktikan bahwa Anda serius menata masa depan.",
+  "Tetaplah belajar, tetaplah rendah hati, dan teruslah melangkah.",
+  "Tidak ada usaha yang sia-sia. Setiap proses mengajarkan sesuatu yang berguna.",
+  "Percaya diri bukan berarti tanpa ragu, melainkan tetap melangkah walau ragu. Anda sudah melakukannya.",
+  "Waktu yang Anda luangkan hari ini adalah bukti komitmen yang patut dihargai.",
+  "Selamat beristirahat. Anda sudah memberikan yang terbaik, dan wajar bila Anda bangga pada diri sendiri."
+];
